@@ -1,94 +1,73 @@
 # GrowthPilot Agent
 
-AI Growth Experiment Design Agent based on LangGraph
+**AI Growth Experiment Design Agent based on LangGraph**  
+**基于 LangGraph 的 AI 增长实验设计 Agent**
 
-GrowthPilot Agent is a multi-agent workflow system that transforms vague business ideas into verifiable growth experiment plans, including conversion funnels, A/B tests, requirement pools, PRD drafts, event tracking plans, metric systems, and iteration suggestions.
+---
 
-GrowthPilot Agent 不是普通 PRD 生成器，而是一个面向消费 / 电商场景的 AI 增长实验设计 Agent。它将模糊商业想法拆解为可验证的增长实验链路，包括业务类型判断、转化漏斗、A/B 测试、需求池、PRD、埋点方案、指标体系和 badcase 迭代建议。
+## English
 
-## Project Entry
+### Overview
+
+GrowthPilot Agent is an experimental AI growth workflow system for consumer and e-commerce scenarios. It transforms vague business ideas into structured growth experiment plans, including conversion funnels, A/B testing plans, requirement pools, PRD drafts, event tracking plans, metric systems, badcase analysis, and iteration suggestions.
+
+### Project Entry
 
 Main project directory:
 
 [intership_program/growthpilot-agent](./intership_program/growthpilot-agent)
 
-Detailed README:
+Detailed project README:
 
 [Project README](./intership_program/growthpilot-agent/README.md)
 
-## Value Proposition
+### Core Workflow
 
-普通 AI PRD 生成器主要解决“文档生成效率”问题。
+Business Idea  
+→ RAG Template Retrieval  
+→ Router Agent  
+→ Funnel Agent  
+→ Experiment Agent  
+→ Requirement Agent  
+→ PRD Agent  
+→ MVP Agent  
+→ Critic Agent  
+→ Markdown Report Export
 
-GrowthPilot Agent 解决的是“商业想法到可验证增长实验之间的结构化落地问题”。
-
-它不是只生成文档，而是生成一条完整链路：
-
-`业务判断 -> 转化漏斗 -> 增长实验 -> A/B 测试 -> 需求池 -> PRD -> 埋点 -> 指标体系 -> Critic Review -> Iteration Log`
-
-- 传统 PRD、需求池、A/B 测试、埋点和指标体系容易分散在不同文档里。
-- GrowthPilot Agent 把这些内容放进同一条 Agent Workflow。
-- 每个需求都绑定漏斗环节和影响指标，而不是只列功能点。
-- 每个实验都要求包含实验组、对照组、成功标准和风险。
-- Critic Agent 会前置发现 badcase，并输出下一轮迭代建议。
-
-## Workflow
-
-```mermaid
-flowchart TD
-    A[Business Idea] --> B[RAG Template Retrieval]
-    B --> C[Router Agent]
-    C --> D[Funnel Agent]
-    D --> E[Experiment Agent]
-    E --> F[Requirement Agent]
-    F --> G[PRD Agent]
-    G --> H[MVP Agent]
-    H --> I[Critic Agent]
-    I --> J[Markdown Report Export]
-```
-
-## Tech Stack
+### Tech Stack
 
 - Python
 - Streamlit
 - LangGraph
 - DeepSeek API / OpenAI-compatible API
 - TF-IDF RAG
+- MCP Server
 - Prompt Engineering
 - Markdown Report Export
 
-## Core Features
+### Core Features
 
 - Business Type Classification
 - User Persona Analysis
 - Conversion Funnel Modeling
-- Growth Experiment Design
 - A/B Testing Plan Generation
 - Requirement Pool Generation
 - PRD Draft Generation
-- MVP Feature Planning
 - Event Tracking Plan
 - Metric System Design
 - Critic Agent Review
 - Badcase Analysis
 - Iteration Suggestions
 - Markdown Report Export
+- Optional MCP Tool Integration
 
-## Why Not Just a PRD Generator?
+### Why GrowthPilot Agent
 
-| Dimension | Ordinary AI PRD Generator | GrowthPilot Agent |
-| --- | --- | --- |
-| Goal | Generate PRD documents | Generate verifiable growth experiment workflow |
-| Output | Mainly documentation | Documents + experiments + metrics + tracking + review |
-| Requirement Pool | Feature list | Features linked to funnel stage and metric |
-| A/B Testing | Often separate or missing | Includes hypothesis, A/B group, metric, risk |
-| Event Tracking | Often added later | Generated with metric system |
-| Badcase Review | Manual review | Critic Agent review |
-| Iteration | Experience-driven | Iteration Log driven by badcase analysis |
+Ordinary document generators mainly focus on writing product documents. GrowthPilot Agent focuses on building a verifiable growth experiment loop.
 
-GrowthPilot Agent focuses on building a verifiable growth loop, not just generating product documents.
+It connects requirements, experiments, metrics, event tracking, risk review, and iteration planning into one workflow.
 
-## Quick Start
+### Quick Start
 
 Windows:
 
@@ -110,11 +89,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Environment Variables
-
-Create a `.env` file from `.env.example`.
-
-DeepSeek example:
+### Environment Variables
 
 ```env
 OPENAI_API_KEY=your_deepseek_api_key
@@ -124,39 +99,121 @@ OPENAI_MODEL=deepseek-chat
 
 This project supports OpenAI-compatible APIs, so it can work with DeepSeek, OpenAI, Qwen, and other compatible models.
 
-## Demo Output Example
+### Optional MCP Integration
 
-Example input:
+GrowthPilot Agent provides an optional MCP Server that exposes selected internal capabilities as tools:
 
-```text
-我想做一个校园二手交易平台
+- `retrieve_growth_templates`
+- `generate_growth_report`
+- `export_growth_report`
+
+The MCP layer is optional and does not affect the Streamlit application.
+
+## 中文
+
+### 项目简介
+
+GrowthPilot Agent 是一个面向消费 / 电商场景的 AI 增长实验设计系统。它可以将模糊商业想法拆解为结构化增长实验方案，覆盖转化漏斗、A/B 测试、需求池、PRD 初稿、埋点方案、指标体系、badcase 分析和迭代建议。
+
+### 项目入口
+
+主项目目录：
+
+[intership_program/growthpilot-agent](./intership_program/growthpilot-agent)
+
+详细项目说明：
+
+[Project README](./intership_program/growthpilot-agent/README.md)
+
+### 核心工作流
+
+商业想法  
+→ RAG 模板检索  
+→ Router Agent  
+→ Funnel Agent  
+→ Experiment Agent  
+→ Requirement Agent  
+→ PRD Agent  
+→ MVP Agent  
+→ Critic Agent  
+→ Markdown 报告导出
+
+### 技术栈
+
+- Python
+- Streamlit
+- LangGraph
+- DeepSeek API / OpenAI-compatible API
+- TF-IDF RAG
+- MCP Server
+- Prompt Engineering
+- Markdown Report Export
+
+### 核心功能
+
+- 业务类型判断
+- 用户画像分析
+- 转化漏斗建模
+- A/B 测试方案生成
+- 需求池生成
+- PRD 初稿生成
+- 埋点方案生成
+- 指标体系设计
+- Critic Agent 审查
+- Badcase 分析
+- 迭代建议
+- Markdown 报告导出
+- Optional MCP 工具集成
+
+### 项目价值
+
+普通文档生成器主要解决“写文档”的问题。GrowthPilot Agent 关注的是“商业想法到可验证增长实验链路”的结构化落地。
+
+它将需求、实验、指标、埋点、风险审查和迭代计划串联在同一条 Agent Workflow 中。
+
+### 快速启动
+
+Windows:
+
+```bash
+cd intership_program/growthpilot-agent
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-Example output:
+macOS / Linux:
 
-```text
-Business Type: Campus C2C second-hand marketplace
-North Star Metric: Weekly successful campus transactions
-Funnel: Exposure -> Product Publish -> Browse/Search -> Contact Seller -> Transaction
-Experiment: Verified seller label A/B test
-Core Metric: Contact initiation rate
-Requirement Pool: P0 / P1 / P2 feature planning
-PRD: MVP product requirement draft
-Event Tracking: page_view, publish_submit, item_card_click, contact_click, mark_deal_click
-Critic Finding: Front-end acquisition experiment is missing
-Iteration Suggestion: Add referral-based acquisition experiment
+```bash
+cd intership_program/growthpilot-agent
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-## Interview Highlights
+### 环境变量
 
-- This is not a PRD generator; it is a growth experiment workflow.
-- LangGraph is used to orchestrate the multi-agent workflow.
-- RAG is used to inject PRD, A/B testing, event tracking and metric templates.
-- Critic Agent acts as a Reflection node for badcase analysis and iteration.
-- The project links requirements, experiments, metrics, tracking and iteration into one workflow.
-- It demonstrates product thinking, metric thinking and AI workflow engineering.
+```env
+OPENAI_API_KEY=your_deepseek_api_key
+OPENAI_BASE_URL=https://api.deepseek.com
+OPENAI_MODEL=deepseek-chat
+```
 
-## Project Structure
+本项目支持 OpenAI-compatible API，因此可以接入 DeepSeek、OpenAI、Qwen 等兼容模型。
+
+### Optional MCP Integration
+
+GrowthPilot Agent 提供 optional MCP Server，将部分内部能力封装为外部可调用工具：
+
+- `retrieve_growth_templates`
+- `generate_growth_report`
+- `export_growth_report`
+
+MCP 层为可选扩展，不影响 Streamlit 主应用运行。
+
+### Project Structure / 项目结构
 
 ```text
 GrowthPilot-Agent-LangGraph-AI-
@@ -168,59 +225,44 @@ GrowthPilot-Agent-LangGraph-AI-
         ├── workflow/
         ├── rag/
         ├── knowledge_base/
+        ├── mcp_server/
         ├── skills/
-        ├── docs/
         ├── examples/
+        ├── docs/
         ├── screenshots/
         └── README.md
 ```
 
-## Future Work
+### Scope / 项目边界
 
-- Add SQL-based experiment result analysis
-- Expand RAG knowledge base by industry
-- Add RAG evaluation metrics such as recall rate and hit rate
-- Add Rewrite Agent for automatic solution revision
-- Package RAG retrieval, SQL analysis and report export as MCP tools
-- Add SQL-based experiment result analysis as an MCP tool
-- Add RAG evaluation as an MCP tool
-- Add Rewrite Agent as an MCP tool
-- Deploy the Streamlit demo online
+This is an experimental MVP, not a production-grade system.
 
-## Optional MCP Integration
-
-GrowthPilot Agent provides an optional MCP server layer that exposes internal capabilities as reusable tools:
-
-- `retrieve_growth_templates`
-- `generate_growth_report`
-- `export_growth_report`
-
-MCP does not directly improve generation quality. It standardizes tool access so MCP-compatible clients can reuse GrowthPilot's RAG retrieval, LangGraph workflow, and Markdown report export capabilities.
-
-This feature is experimental and not required to run the Streamlit demo.
-
-## Project Scope
-
-This is a job-seeking MVP project, not a production-grade system.
+本项目是实验性 MVP，不是生产级系统。
 
 Current scope:
 
-- Local Streamlit demo
+- Local Streamlit application
 - OpenAI-compatible LLM API
 - Local Markdown knowledge base
 - TF-IDF RAG
+- LangGraph workflow
+- Optional MCP Server
 - Markdown report export
-- Mock fallback when API key is missing
 
-Not included in the MVP:
+Not included:
 
-- Real production database
-- Real user login system
-- Real payment system
+- Production database
+- User account system
+- Payment system
 - Real crawler
 - Fine-tuning
-- Production-level MCP integration
+- Production-level deployment
 
-## Author
+### Future Work / 后续方向
 
-Built by AEsir-Official as a summer internship portfolio project.
+- Add SQL-based experiment result analysis
+- Expand the RAG knowledge base by industry
+- Add RAG evaluation metrics such as recall rate and hit rate
+- Add Rewrite Agent for automatic solution revision
+- Add real competitor data input
+- Deploy the Streamlit demo online

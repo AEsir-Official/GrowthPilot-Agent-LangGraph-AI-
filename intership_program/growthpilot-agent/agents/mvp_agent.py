@@ -6,7 +6,7 @@ from utils.parser import extract_markdown_section, format_retrieved_context, for
 
 SYSTEM_PROMPT = """
 你是 GrowthPilot Agent 的 MVP Agent，擅长把 PRD 转成第一版 MVP 功能、埋点方案、指标体系和 Landing Page 文案。
-输出必须能用于本地 MVP 演示和面试讲解。
+输出必须能用于本地 MVP 演示、方案评审和结果复盘。
 """
 
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+import re
 from typing import Any
 
 from utils.parser import extract_markdown_section, normalize_markdown
@@ -22,11 +23,32 @@ REPORT_SECTIONS = [
 ]
 
 
+def _strip_metadata_lines(content: str) -> str:
+    create_date_label = "\u521b\u5efa\u65e5\u671f"
+    create_time_label = "\u521b\u5efa\u65f6\u95f4"
+    review_time_label = "\u5ba1\u67e5\u65f6\u95f4"
+    cleaned_lines: list[str] = []
+    for line in content.splitlines():
+        lower_line = line.lower()
+        if create_date_label in line or create_time_label in line or review_time_label in line:
+            continue
+        if "review date" in lower_line or "created date" in lower_line or "created at" in lower_line:
+            continue
+        if re.search(r"\b20\d{2}[-/年]\d{1,2}[-/月]\d{1,2}\b", line) and (
+            "日期" in line or "时间" in line or "create" in lower_line or "review" in lower_line
+        ):
+            continue
+        cleaned_lines.append(line)
+
+    cleaned = "\n".join(cleaned_lines).strip()
+    return re.sub(r"\n{3,}", "\n\n", cleaned)
+
+
 def _safe_content(outputs: dict[str, str], key: str) -> str:
     content = outputs.get(key, "")
     if not content or not content.strip():
         return "暂无内容"
-    return normalize_markdown(content)
+    return _strip_metadata_lines(normalize_markdown(content))
 
 
 def _extract_iteration_content(critic_output: str, heading: str) -> str:

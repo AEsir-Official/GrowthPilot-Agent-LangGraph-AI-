@@ -42,7 +42,7 @@ def count_chinese_chars(text: str) -> int:
 def render_sidebar() -> None:
     with st.sidebar:
         st.header("项目定位")
-        st.markdown("求职展示型 AI Agent Workflow MVP，聚焦消费 / 电商增长实验设计。")
+        st.markdown("面向消费 / 电商场景的 AI Growth Experiment Workflow，支持商业想法到增长实验方案的结构化生成。")
 
         st.header("技术栈")
         st.markdown(
@@ -68,7 +68,7 @@ def render_sidebar() -> None:
 """
         )
 
-        st.header("面试关键词")
+        st.header("技术关键词")
         st.markdown(
             """
 - Agent Workflow

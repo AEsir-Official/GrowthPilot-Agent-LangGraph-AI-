@@ -59,7 +59,7 @@ def build_funnel(
 要求：
 - 禁止输出空泛建议。
 - 每条建议必须绑定漏斗环节、具体动作、核心指标和可验证方式。
-- 优先使用表格表达，便于面试展示。
+- 优先使用表格表达，便于评审、复盘和结果对比。
 """
 
     llm_output = call_llm(prompt, system_prompt=SYSTEM_PROMPT)

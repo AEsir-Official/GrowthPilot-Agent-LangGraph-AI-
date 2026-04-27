@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -69,10 +70,13 @@ def main() -> None:
     assert "badcase" in report.lower(), "Markdown report missing badcase content"
     assert "下一轮迭代建议" in report, "Markdown report missing next iteration suggestions"
 
-    forbidden_dates = ["2023-10-27", "审查时间：2023", "2024-01-01"]
-    for item in forbidden_dates:
-        assert item not in result["critic_output"], f"Critic output contains forbidden date: {item}"
-        assert item not in report, f"Markdown report contains forbidden date: {item}"
+    forbidden_patterns = [
+        r"\b20\d{2}-\d{2}-\d{2}\b",
+        r"\u5ba1\u67e5\u65f6\u95f4[:：]\s*20\d{2}",
+    ]
+    for pattern in forbidden_patterns:
+        assert not re.search(pattern, result["critic_output"]), f"Critic output contains forbidden date pattern: {pattern}"
+        assert not re.search(pattern, report), f"Markdown report contains forbidden date pattern: {pattern}"
 
     print("Smoke test passed.")
 

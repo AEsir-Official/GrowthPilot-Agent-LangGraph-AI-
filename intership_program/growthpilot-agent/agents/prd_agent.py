@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from utils.llm import call_llm
 from utils.parser import format_retrieved_context, format_upstream_outputs
 
@@ -7,6 +9,7 @@ from utils.parser import format_retrieved_context, format_upstream_outputs
 SYSTEM_PROMPT = """
 你是 GrowthPilot Agent 的 PRD Agent，擅长把增长实验和需求池整理成产品需求文档初稿。
 输出要清晰、完整、可进入 MVP 开发讨论。
+不要输出日期字段、审阅时间字段或任何固定历史日期。
 """
 
 
@@ -69,6 +72,28 @@ def _mock_prd(idea: str) -> dict[str, str]:
     return {"prd": prd_md.strip()}
 
 
+def _sanitize_prd_output(text: str) -> str:
+    create_date_label = "\u521b\u5efa\u65e5\u671f"
+    create_time_label = "\u521b\u5efa\u65f6\u95f4"
+    review_time_label = "\u5ba1\u67e5\u65f6\u95f4"
+    cleaned_lines: list[str] = []
+    for line in text.splitlines():
+        lower_line = line.lower()
+        if create_date_label in line or create_time_label in line or review_time_label in line:
+            continue
+        if "review date" in lower_line or "created date" in lower_line or "created at" in lower_line:
+            continue
+        if re.search(r"\b20\d{2}[-/年]\d{1,2}[-/月]\d{1,2}\b", line) and (
+            "日期" in line or "时间" in line or "create" in lower_line or "review" in lower_line
+        ):
+            continue
+        cleaned_lines.append(line)
+
+    cleaned = "\n".join(cleaned_lines).strip()
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    return cleaned
+
+
 def build_prd_bundle(
     idea: str,
     outputs: dict[str, str],
@@ -102,13 +127,14 @@ def build_prd_bundle(
 - 风险与边界
 
 要求：
+- 不要输出日期字段、审阅时间字段或任何固定历史日期。
 - 禁止输出空泛建议。
 - 功能需求必须绑定漏斗环节、具体动作、核心指标和可验证方式。
 - 数据指标必须能支持 A/B 测试和后续迭代判断。
 """
 
     llm_output = call_llm(prompt, system_prompt=SYSTEM_PROMPT)
-    result = {"prd": llm_output or fallback["prd"]}
+    result = {"prd": _sanitize_prd_output(llm_output) if llm_output else fallback["prd"]}
     used_fallback = not bool(llm_output)
     if return_meta:
         return result, used_fallback
