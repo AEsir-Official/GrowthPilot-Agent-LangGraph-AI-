@@ -363,6 +363,24 @@ Agent 未来可以基于真实指标判断 A/B 测试是否成功，并自动生
 
 ## Future Work
 
+Additional MCP-related future work:
+
+- Add SQL-based experiment result analysis as an MCP tool
+- Add RAG evaluation as an MCP tool
+- Add Rewrite Agent as an MCP tool
+
+## Optional MCP Integration
+
+GrowthPilot Agent provides an optional MCP server layer that exposes internal capabilities as reusable tools:
+
+- `retrieve_growth_templates`
+- `generate_growth_report`
+- `export_growth_report`
+
+MCP does not directly improve generation quality. It standardizes tool access so MCP-compatible clients can reuse GrowthPilot's RAG retrieval, LangGraph workflow, and Markdown report export capabilities.
+
+This feature is experimental and not required to run the Streamlit demo.
+
 - 接入真实业务数据库，用 SQL 分析转化漏斗。
 - 接入真实搜索 API 做竞品调研。
 - 接入真实埋点数据做自动复盘，形成“生成方案 -> 执行实验 -> 数据复盘 -> 自动迭代”的闭环。

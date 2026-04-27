@@ -182,7 +182,22 @@ GrowthPilot-Agent-LangGraph-AI-
 - Add RAG evaluation metrics such as recall rate and hit rate
 - Add Rewrite Agent for automatic solution revision
 - Package RAG retrieval, SQL analysis and report export as MCP tools
+- Add SQL-based experiment result analysis as an MCP tool
+- Add RAG evaluation as an MCP tool
+- Add Rewrite Agent as an MCP tool
 - Deploy the Streamlit demo online
+
+## Optional MCP Integration
+
+GrowthPilot Agent provides an optional MCP server layer that exposes internal capabilities as reusable tools:
+
+- `retrieve_growth_templates`
+- `generate_growth_report`
+- `export_growth_report`
+
+MCP does not directly improve generation quality. It standardizes tool access so MCP-compatible clients can reuse GrowthPilot's RAG retrieval, LangGraph workflow, and Markdown report export capabilities.
+
+This feature is experimental and not required to run the Streamlit demo.
 
 ## Project Scope
 
