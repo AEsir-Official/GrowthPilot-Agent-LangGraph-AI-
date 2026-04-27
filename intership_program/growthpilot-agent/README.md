@@ -4,6 +4,35 @@ GrowthPilot Agent is an AI growth experiment design system for consumer and e-co
 
 它不是普通 PRD 生成器，而是一个把商业想法拆解成增长验证链路的 AI Growth Experiment Workflow：业务类型判断、用户画像、转化漏斗、增长实验、A/B 测试、需求池、PRD、埋点方案、指标体系、Landing Page 文案，以及基于 Critic Agent 的 badcase 分析和迭代建议。
 
+## Demo Screenshots / 项目截图
+
+### 1. Home Page / 首页
+
+![Home Page](./screenshots/home.png)
+
+**EN:** The home page provides a business idea input box, example scenarios, workflow description, and key technical modules.  
+**中文：** 首页包含商业想法输入框、示例场景、工作流说明和核心技术模块展示。
+
+---
+
+### 2. Generated Report Overview / 生成结果总览
+
+![Generated Report Overview](./screenshots/result_overview.png)
+
+**EN:** The system generates a structured growth experiment report through the LangGraph-based multi-agent workflow.  
+**中文：** 系统通过基于 LangGraph 的多 Agent 工作流生成结构化增长实验报告。
+
+---
+
+### 3. Markdown Report Export / Markdown 报告导出
+
+![Markdown Report Export](./screenshots/export_report.png)
+
+**EN:** The final output can be exported as a Markdown report for documentation and iteration.  
+**中文：** 最终结果可以导出为 Markdown 报告，用于文档沉淀和后续迭代。
+
+---
+
 ## Overview
 
 Many business ideas start as a short sentence, but validating them usually requires multiple disconnected artifacts: funnels, requirements, experiments, PRDs, event tracking, metrics, and review notes.
@@ -251,4 +280,3 @@ Not included in the MVP:
 - add SQL-based experiment result analysis as an MCP tool
 - add RAG evaluation as an MCP tool
 - add Rewrite Agent as an MCP tool
-

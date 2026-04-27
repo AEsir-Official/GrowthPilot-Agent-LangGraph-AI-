@@ -11,6 +11,35 @@
 
 GrowthPilot Agent is an experimental AI growth workflow system for consumer and e-commerce scenarios. It transforms vague business ideas into structured growth experiment plans, including conversion funnels, A/B testing plans, requirement pools, PRD drafts, event tracking plans, metric systems, badcase analysis, and iteration suggestions.
 
+## Demo Screenshots / 项目截图
+
+### 1. Home Page / 首页
+
+![Home Page](./intership_program/growthpilot-agent/screenshots/home.png)
+
+**EN:** The home page provides a business idea input box, example scenarios, workflow description, and key technical modules.  
+**中文：** 首页包含商业想法输入框、示例场景、工作流说明和核心技术模块展示。
+
+---
+
+### 2. Generated Report Overview / 生成结果总览
+
+![Generated Report Overview](./intership_program/growthpilot-agent/screenshots/result_overview.png)
+
+**EN:** After entering a business idea, the system generates a structured growth experiment report, including funnel analysis, A/B testing, requirement pool, PRD draft, event tracking plan, metric system, and Critic Agent review.  
+**中文：** 输入商业想法后，系统会生成结构化增长实验报告，包含转化漏斗、A/B 测试、需求池、PRD 初稿、埋点方案、指标体系和 Critic Agent 审查。
+
+---
+
+### 3. Markdown Report Export / Markdown 报告导出
+
+![Markdown Report Export](./intership_program/growthpilot-agent/screenshots/export_report.png)
+
+**EN:** The generated result can be exported as a Markdown report for review, documentation, and further iteration.  
+**中文：** 生成结果可以导出为 Markdown 报告，便于后续复盘、文档沉淀和迭代分析。
+
+---
+
 ### Project Entry
 
 Main project directory:
